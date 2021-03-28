@@ -6,14 +6,21 @@ import (
 	"net/http"
 	"os"
 
+	"github.com/joho/godotenv"
 	"github.com/line/line-bot-sdk-go/linebot"
 )
 
 func main() {
 
-	ChanellSecret := "60d4379d20eca6b2a701c111e5587258"
-	ChanellToken := "7/f3ibMIbfOC8lzJSe42qcDiw6Hiwy2sYNVvppumQZ8k2bBzYWgEl8fz6nmlRC4n5JBC9oMIyMXk1UfgNtL3PM0xUvGlPmNkQuNXSF0/3z6ttrCmxTlpop4W7nZACBYI4dmPH9Pz339i3/7hGUAnfgdB04t89/1O/w1cDnyilFU="
-	bot, err := linebot.New(ChanellSecret, ChanellToken)
+	//	Secret := "60d4379d20eca6b2a701c111e5587258"
+	//	Token := "7/f3ibMIbfOC8lzJSe42qcDiw6Hiwy2sYNVvppumQZ8k2bBzYWgEl8fz6nmlRC4n5JBC9oMIyMXk1UfgNtL3PM0xUvGlPmNkQuNXSF0/3z6ttrCmxTlpop4W7nZACBYI4dmPH9Pz339i3/7hGUAnfgdB04t89/1O/w1cDnyilFU="
+	err := godotenv.Load()
+	if err != nil {
+		log.Fatal(err)
+	}
+	Secret := os.Getenv("Secret")
+	Token := os.Getenv("Token")
+	bot, err := linebot.New(Secret, Token)
 	if err != nil {
 		log.Fatal(err)
 	}
