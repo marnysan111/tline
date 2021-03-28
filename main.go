@@ -35,6 +35,7 @@ func main() {
 				case *linebot.TextMessage:
 					if message.Text == "Twitter" {
 						if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("twitterだお")).Do(); err != nil {
+							fmt.Println(message.Text)
 							log.Print(err)
 						}
 					} else {
