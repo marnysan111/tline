@@ -11,8 +11,8 @@ import (
 
 func main() {
 
-	ChanellSecret := "c908a2772b8888770864cbfebe7fb19b"
-	ChanellToken := "fvqbQTSR5zCUB2CFDaZK7bP6F4g77z30QBkn+3UArzE1NBaiXmXpINQKmTGWz463KfR4pUQWnvq/Q4eQTSdA3yUrymYgTxv6HvjaiI+Kc63lqQEToT8DovnKmlwfpDB3brXndxbCUEypmz8M/W50FQdB04t89/1O/w1cDnyilFU="
+	ChanellSecret := "60d4379d20eca6b2a701c111e5587258"
+	ChanellToken := "7/f3ibMIbfOC8lzJSe42qcDiw6Hiwy2sYNVvppumQZ8k2bBzYWgEl8fz6nmlRC4n5JBC9oMIyMXk1UfgNtL3PM0xUvGlPmNkQuNXSF0/3z6ttrCmxTlpop4W7nZACBYI4dmPH9Pz339i3/7hGUAnfgdB04t89/1O/w1cDnyilFU="
 	bot, err := linebot.New(ChanellSecret, ChanellToken)
 	if err != nil {
 		log.Fatal(err)
@@ -35,7 +35,6 @@ func main() {
 				case *linebot.TextMessage:
 					if message.Text == "Twitter" {
 						if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("twitterだお")).Do(); err != nil {
-							fmt.Println(message.Text)
 							log.Print(err)
 						}
 					} else {
