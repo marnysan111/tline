@@ -5,26 +5,16 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"tline/auth"
 
-	"github.com/joho/godotenv"
 	"github.com/line/line-bot-sdk-go/linebot"
 )
 
 func main() {
-
-	//	Secret := "60d4379d20eca6b2a701c111e5587258"
-	//	Token := "7/f3ibMIbfOC8lzJSe42qcDiw6Hiwy2sYNVvppumQZ8k2bBzYWgEl8fz6nmlRC4n5JBC9oMIyMXk1UfgNtL3PM0xUvGlPmNkQuNXSF0/3z6ttrCmxTlpop4W7nZACBYI4dmPH9Pz339i3/7hGUAnfgdB04t89/1O/w1cDnyilFU="
-	err := godotenv.Load()
+	bot, err := auth.AuthLine()
 	if err != nil {
 		log.Fatal(err)
 	}
-	Secret := os.Getenv("Secret")
-	Token := os.Getenv("Token")
-	bot, err := linebot.New(Secret, Token)
-	if err != nil {
-		log.Fatal(err)
-	}
-
 	// Setup HTTP Server for receiving requests from LINE platform
 	http.HandleFunc("/callback", func(w http.ResponseWriter, req *http.Request) {
 		events, err := bot.ParseRequest(req)
@@ -40,7 +30,7 @@ func main() {
 			if event.Type == linebot.EventTypeMessage {
 				switch message := event.Message.(type) {
 				case *linebot.TextMessage:
-					if message.Text == "Twitter" {
+					if message.Text == "ハッシュタグ" {
 						if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("twitterだお")).Do(); err != nil {
 							log.Print(err)
 						}
